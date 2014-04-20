@@ -18,11 +18,7 @@ public class DisplayMessageActivity extends Activity
     {
         super.onCreate( savedInstanceState );
 
-	/*
-	if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB )
-	{
-	    getActionBar().setDisplayHomeAsUpEnabled( true );
-	}*/
+	getActionBar().setDisplayHomeAsUpEnabled( true );
 
 	Intent intent = getIntent();
 	String message = intent.getStringExtra( HelloWorld.EXTRA_MESSAGE );
