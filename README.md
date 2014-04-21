@@ -53,16 +53,14 @@ product. Note that you will need to create your own key using the
 keytool command provided with the Java JDK in order to build a
 release.
 
-You are expected to modify the local.properties file after you run the
+You are expected to modify the secure.properties file after you run the
 autogen.sh script. The autogen.sh script simply adds blank values to
 the following entries, which it adds if they are missing:
 
-keystore.dir - The directory where the keystore is located
-keystore.name - The filename of the keystore being used
-key.name - The alias of the key being used
-
-If you look at ant.properties, you will notice that these variables are
-used to find the appropriate key when building a release apk.
+key.store - Point this to you keystore file
+key.alias - Provide the alias of the key you're signing with
+key.store.password - Optionally provide the keystore passwd for automated signing
+key.alias.password - Optionally provide the key alias passwd for automated signing
 
 Note that you can always build the debug build without generating or
 configuring your own keys.
