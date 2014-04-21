@@ -59,11 +59,11 @@ if [ -d "$PROJECT_DIR/jni" ]; then
 
 	# Verify that the ndk-build tool exists and error if unavailable
 	if [ ! -x "$NDK_BUILD_CMD" ]; then
-		echo "ERROR: ndk-build is unavailable."
+		echo "WARNING: ndk-build is unavailable."
 		echo "This package contains jni code which must be compiled using ndk-build."
 		echo "Be sure you've downloaded the ndk and that the ANDROID_NDK environment"
-		echo "variable is set to the unzipped ndk"
-		exit 1
+		echo "variable is set to the unzipped ndk. You can not build the native code"
+		echo "until the ndk is installed appropriately."
 	fi
 fi
 
