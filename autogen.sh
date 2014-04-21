@@ -15,16 +15,22 @@ PROJECT_TARGET="1"
 # Where we install our libraries
 LIB_DIR=$PROJECT_DIR/libs
 
-# Find this system's cp command
+# Find this system's cp and mkdir commands
 CP_CMD="$(which cp)"
+MKDIR_CMD="$(which mkdir)"
 
 # Attempt to set the SDK and NDK if not available
-if [ -n "$ANDROID_SDK" ]; then
+if [ -z "$ANDROID_SDK" ]; then
 	export ANDROID_SDK=$HOME/Android/SDK	#This is a symbolic link to the SDK on my system
 fi
 
-if [ -n "$ANDROID_NDK" ]; then
+if [ -z "$ANDROID_NDK" ]; then
 	export ANDROID_NDK=$HOME/Android/SDK	#This is a symbolic link to the NDK on my system
+fi
+
+# If there is no libs directory, make it now
+if [ ! -d  "$LIB_DIR" ]; then
+	$MKDIR_CMD $PROJECT_DIR/libs
 fi
 
 # Find the android command
