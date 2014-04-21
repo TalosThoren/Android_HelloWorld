@@ -65,9 +65,6 @@ if [ -d "$PROJECT_DIR/jni" ]; then
 		echo "variable is set to the unzipped ndk"
 		exit 1
 	fi
-
-	# Let's go ahead and build our native sources now
-	$NDK_BUILD_CMD
 fi
 
 # If there is no libs directory, make it now
