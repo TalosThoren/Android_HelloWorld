@@ -15,10 +15,6 @@ PROJECT_TARGET="1"
 # Where we install our libraries
 LIB_DIR=$PROJECT_DIR/libs
 
-# Find this system's cp and mkdir commands
-CP_CMD="$(which cp)"
-MKDIR_CMD="$(which mkdir)"
-
 # If ANDROID_SDK is not already set, set it to this default.
 # NOTE:	Alter this if you have a different default location.
 if [ -z "$ANDROID_SDK" ]; then
@@ -40,6 +36,14 @@ fi
 # Locations of support libraries we need from the sdk
 LIB_APPCOMPAT_SRC_DIR=$ANDROID_SDK/extras/android/support/v7/appcompat
 LIB_APPCOMPAT_INST_DIR=$LIB_DIR/appcompat
+
+# Verify that appcompat library exists and error if unavailable
+if [ ! -d "$LIB_APPCOMPAT_SRC_DIR" ]; then
+	echo "ERROR: appcompat libraries unavailable."
+	echo "Be sure you've installed the support libraries and repositories using"
+	echo "the android sdk manager."
+	exit 1
+fi
 
 # For jni projects we also need the ndk
 if [ -d "$PROJECT_DIR/jni" ]; then
@@ -68,12 +72,12 @@ fi
 
 # If there is no libs directory, make it now
 if [ ! -d  "$LIB_DIR" ]; then
-	$MKDIR_CMD $PROJECT_DIR/libs
+	mkdir $PROJECT_DIR/libs
 fi
 
 # Obtain the appcompat library that this project needs;
 # you must have these installed within your SDK.
-$CP_CMD -R $LIB_APPCOMPAT_SRC_DIR $LIB_DIR
+cp -R $LIB_APPCOMPAT_SRC_DIR $LIB_DIR
 
 # Update the appcompat lib so we can use its resources
 $ANDROID_CMD update lib-project \
@@ -85,3 +89,11 @@ $ANDROID_CMD update project \
 	--name $PROJECT_NAME \
 	--target $PROJECT_TARGET \
 	--subprojects
+
+# Add an entry to local.properties to point to your release keys
+# NOTE: You must manually edit the local.properties file to point to your generated keys
+if [ -z $(sed -n '/keystore.dir/p' $PROJECT_DIR/local.properties) ]; then
+	echo "keystore.dir=" >> $PROJECT_DIR/local.properties
+	echo "keystore.name=" >> $PROJECT_DIR/local.properties
+	echo "key.name=" >> $PROJECT_DIR/local.properties
+fi
