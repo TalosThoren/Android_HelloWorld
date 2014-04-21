@@ -90,8 +90,10 @@ $ANDROID_CMD update project \
 	--target $PROJECT_TARGET \
 	--subprojects
 
-# Add an entry to local.properties to point to your release keys
-# NOTE: You must manually edit the local.properties file to point to your generated keys
+# If keystore.dir does not exist in the local.properties file, add blank entries
+# for keystore and key configuration to local.properties.
+# NOTE: You must manually edit the local.properties file to point to your generated
+# keystore and to set you key name.
 if [ -z $(sed -n '/keystore.dir/p' $PROJECT_DIR/local.properties) ]; then
 	echo "keystore.dir=" >> $PROJECT_DIR/local.properties
 	echo "keystore.name=" >> $PROJECT_DIR/local.properties
