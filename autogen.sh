@@ -19,7 +19,7 @@ LIB_DIR=$PROJECT_DIR/libs
 # NOTE: Alter this if you have a different default location.
 if [ -z "$ANDROID_SDK" ]; then
     # Change ANDROID_SDK below to the path of your SDK
-    export ANDROID_SDK=$HOME/Android/SDK    #This is a symbolic link to the SDK on my system
+    export ANDROID_SDK=$HOME/Android/ANDROID_SDK    #This is a symbolic link to the SDK on my system
 fi
 
 # Set the android command
@@ -51,7 +51,7 @@ if [ -d "$PROJECT_DIR/jni" ]; then
     # NOTE: Alter this if you have a different default location.
     if [ -z "$ANDROID_NDK" ]; then
         # Change ANDROID_NDK below to the path of your NDK
-        export ANDROID_NDK=$HOME/Android/NDK    #This is a symbolic link to the NDK on my system
+        export ANDROID_NDK=$HOME/Android/ANDROID_NDK    #This is a symbolic link to the NDK on my system
     fi
 
     # Set the ndk-build command
